@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBNA Lab - Our Team</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Team Page Styles */
+        .team-hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('team-hero-bg.jpg') center/cover no-repeat;
+            color: var(--text-color);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .team-section {
+            padding: 100px 0;
+        }
+    
+        .team-category {
+            margin-bottom: 80px;
+        }
+    
+        .category-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding-bottom: 80px; /* Space for email icon */
+        }
+    
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+    
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+    
+        .team-member:hover .member-photo img {
+            transform: scale(1.1);
+        }
+    
+        .member-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+    
+        .member-role {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+    
+        .member-info {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+    
+        .member-contact {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+    
+        .member-contact:hover {
+            transform: translateX(-50%) translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive Header Styles */
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            transform: scaleX(1);
+        }
+
+        @media (max-width: 768px) {
+            .nav-icon {
+                display: block;
+                cursor: pointer;
+            }
+
+            .nav-icon span {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background-color: var(--text-color);
+                margin: 5px 0;
+                transition: all 0.3s ease;
+            }
+
+            .nav-open .nav-icon span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .nav-open .nav-icon span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-open .nav-icon span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--bg-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.5s ease;
+            }
+
+            .nav-open .nav-links {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo.png" alt="SBNA Logo" style="height: 50px;"> <!-- Replace with your logo -->
+                </a>
+            </div>
+            <nav class="main-nav">
+                <div class="nav-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="team.html" class="active">Team</a></li>
+                    <li><a href="publications.html">Publications</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="team" class="team-section">
+            <div class="team-category">
+                <h2 class="category-title">Lab Leadership</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/Dr.jpg" alt="Lab Leader">
+                        </div>
+                        <h3 class="member-name">Dr. Sadegh Sulaimany</h3>
+                        <p class="member-role">Head of the Laboratory</p>
+                        <p class="member-info">Specializing in graph theory and machine learning. With SBNA since 2018.</p>
+                        <p class="member-info">Sadegh Sulaimany is Assistant Professor at the Department of Computer Engineering in University of Kurdistan, Iran. He received his PhD in Bioinformatics from Tehran University in 2017. His Master and Bachelor degrees are in Computer Science and Engineering from Amirkabir and Isfahan University of Technology. His research interest lies in the biological and social network analysis, especially link prediction algorithms for different application areas.  He is always open to collaborations, and has many international colleagues with shared research projects.</p>
+                        <a href="mailto:S.Sulaimany@UoK.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h2 class="category-title">Internal Students</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/Aso.jpg" alt="Internal Student 1">
+                        </div>
+                        <h3 class="member-name">Aso Mafakheri</h3>
+                        <p class="member-role">PhD student of Software Engineering</p>
+                        <p class="member-info">Android malware detection, Link prediction Applications. Joined in 2020.</p>
+                        <a href="mailto:Aso.Mafakheri@UoK.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/safahi.jpg" alt="Internal Student 2">
+                        </div>
+                        <h3 class="member-name">Zhino Safahi</h3>
+                        <p class="member-role">PhD student of Software Engineering</p>
+                        <p class="member-info">Visibility Graph-based Brain network analysis. Joined in 2020.</p>
+                        <a href="mailto:Zhino.Safahi@UoK.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/abolfazl.jpg" alt="Internal Student 3">
+                        </div>
+                        <h3 class="member-name">Abolfazl Dibaji</h3>
+                        <p class="member-role">MSc student of Software Engineering</p>
+                        <p class="member-info">Researching machine learning for community detection. Joined in 2022.</p>
+                        <a href="mailto:abolfazl.dibaji@uok.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/saedi.jpg" alt="Internal Student 4">
+                        </div>
+                        <h3 class="member-name">Shima Saedi</h3>
+                        <p class="member-role">MSc student of Artificial Intelligence</p>
+                        <p class="member-info">Graph based improvement of brain disease diagnosis. Joined in 2021.</p>
+                        <a href="mailto:Shima.Saedi@UoK.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/vahid.jpg" alt="Internal Student 5">
+                        </div>
+                        <h3 class="member-name">Vahid Absalan</h3>
+                        <p class="member-role">MSc student of Artificial Intelligence</p>
+                        <p class="member-info">Improving centrality based link prediction. Joined in 2021.</p>
+                        <a href="mailto:Vahid.Absalan@UoK.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/ehsan.jpg" alt="Internal Student 6">
+                        </div>
+                        <h3 class="member-name">Ehsan Azimipour</h3>
+                        <p class="member-role">MSc student of Software Engineering </p>
+                        <p class="member-info">Gene Essentiality Prediction. Joined in 2021.</p>
+                        <a href="mailto:Ehsan.azimipour@UoK.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/ghanbary.jpg" alt="Internal Student 7">
+                        </div>
+                        <h3 class="member-name">Maryam Ghanbari</h3>
+                        <p class="member-role">MSc student of Software Engineering </p>
+                        <p class="member-info">Network based Bug Localization. Joined in 2021.</p>
+                        <a href="mailto:Maryam.Ghanbari@UoK.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/parsa.jpg" alt="Internal Student 6">
+                        </div>
+                        <h3 class="member-name">Parsa Andalibi</h3>
+                        <p class="member-role">MSc student of Software Engineering </p>
+                        <p class="member-info">Medical Network Analysis. Joined in 2022.</p>
+                        <a href="mailto:parsa.andalibi@uok.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <!-- Add more internal students as needed -->
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h2 class="category-title">International Students</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/kewan.jpg" alt="International Student 1">
+                        </div>
+                        <h3 class="member-name">Kewan Sulaiman Saleh</h3>
+                        <p class="member-role">MSc student of Software Engineering</p>
+                        <p class="member-info">Graph Neural Networks for Link Prediction. From Iraq, joined in 2022.</p>
+                        <a href="mailto:keywan.sulaiman@uok.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/turan.jpg" alt="International Student 2">
+                        </div>
+                        <h3 class="member-name">Turan Mohammed Ahmed</h3>
+                        <p class="member-role">MSc student of Software Engineering</p>
+                        <p class="member-info">COVID-19 Graph Based Diagnosis. From Iraq, joined in 2022.</p>
+                        <a href="mailto:turan.mohammed@uok.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/havar.jpg" alt="International Student 3">
+                        </div>
+                        <h3 class="member-name">Havar Bakhtyar Shalli</h3>
+                        <p class="member-role">MSc student of Software Engineering</p>
+                        <p class="member-info">Phishing detection. From Iraq, joined in 2022.</p>
+                        <a href="mailto:havar.bakhtyar@uok.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/diyari.jpg" alt="International Student 4">
+                        </div>
+                        <h3 class="member-name">Diyari Ahmad Mamand</h3>
+                        <p class="member-role">MSc student of Software Engineering</p>
+                        <p class="member-info">Software Fault Detection. From Iraq, joined in 2022.</p>
+                        <a href="mailto:diyari.mamand@uok.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <!-- Add more international students as needed -->
+                </div>
+            </div>
+
+            <div class="team-category">
+                <h2 class="category-title">Graduates</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/batmani.jpg" alt="Alumni 1">
+                        </div>
+                        <h3 class="member-name">Sahar Batmani</h3>
+                        <p class="member-role">Former MSc student of Artificial Intelligence</p>
+                        <p class="member-info">Recommender systems with graph neural networks. 2020-2023.</p>
+                        <a href="mailto:S.Batmani@UoK.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/jarahi.jpg" alt="Alumni 2">
+                        </div>
+                        <h3 class="member-name">Sanaz Jarahi</h3>
+                        <p class="member-role">Former MSc student of Software Engineering</p>
+                        <p class="member-info">Multilayer Link Prediction. 2021-2023.</p>
+                        <a href="mailto:S.Jarahi@UoK.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/azizi.jpg" alt="Alumni 3">
+                        </div>
+                        <h3 class="member-name">Hadis Azizi</h3>
+                        <p class="member-role">Former MSc student of Software Engineering</p>
+                        <p class="member-info">Novel Approaches for Educational Data Mining. 2021-2023.</p>
+                        <a href="mailto:Hadis.Azizi@UoK.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="Pictures/fathi.jpg" alt="Alumni 4">
+                        </div>
+                        <h3 class="member-name">Samenah Fathi</h3>
+                        <p class="member-role">Former MSc student of Software Engineering</p>
+                        <p class="member-info">Web phishing analysis. 2021-2023.</p>
+                        <a href="mailto:Samaneh.Fathi@UoK.ac.ir" class="member-contact">
+                            <i class="far fa-envelope"></i>
+                        </a>
+                    </div>
+                    <!-- Add more alumni as needed -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="research.html">Our Research</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="publications.html">Publications</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <h4>Connect with Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="icon-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="icon-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="icon-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="icon-link"><i class="fab fa-medium"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SBNA Lab (UOK). All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    // Matrix Rain Effect
+    const canvas = document.getElementById('matrix-rain');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = Math.floor(canvas.width / fontSize);
+
+        const rainDrops = [];
+
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(draw, 30);
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', e => {
+            cursor.setAttribute("style", "top: " + (e.pageY - 10) + "px; left: " + (e.pageX - 10) + "px;");
+            follower.setAttribute("style", "top: " + (e.pageY - 20) + "px; left: " + (e.pageX - 20) + "px;");
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from('.hero-content', { duration: 1, y: 50, opacity: 0, ease: 'power3.out' });
+        gsap.from('.logo', { duration: 1, y: -50, opacity: 0, ease: 'power3.out' });
+        gsap.from('.nav-links li', { duration: 1, y: -50, opacity: 0, stagger: 0.2, ease: 'power3.out' });
+
+        gsap.from('.team-hero', { duration: 1, y: 50, opacity: 0, ease: 'power3.out' });
+        gsap.from('.category-title', { scrollTrigger: '.category-title', duration: 1, y: 50, opacity: 0, ease: 'power3.out', stagger: 0.2 });
+        gsap.from('.team-member', { scrollTrigger: '.team-member', duration: 1, y: 50, opacity: 0, ease: 'power3.out', stagger: 0.1 });
+
+        // Mobile Navigation
+        const navIcon = document.querySelector('.nav-icon');
+        const navLinks = document.querySelector('.nav-links');
+
+        navIcon.addEventListener('click', () => {
+            document.body.classList.toggle('nav-open');
+        });
+
+        // Team Member Hover Effect
+        const teamMembers = document.querySelectorAll('.team-member');
+
+        teamMembers.forEach(member => {
+            member.addEventListener('mouseenter', () => {
+                gsap.to(member.querySelector('.member-photo img'), { duration: 0.5, scale: 1.1, ease: 'power3.out' });
+            });
+
+            member.addEventListener('mouseleave', () => {
+                gsap.to(member.querySelector('.member-photo img'), { duration: 0.5, scale: 1, ease: 'power3.out' });
+            });
+        });
+    });
+</script>
